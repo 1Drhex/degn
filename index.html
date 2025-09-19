@@ -13,7 +13,7 @@
     input[type=text], textarea{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit}
     textarea{min-height:70px;resize:vertical}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .controls{margin-top:12px;display:flex;gap:8px}
+    .controls{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
     button{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;background:#2563eb;color:white}
     button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#dbeafe}
     pre#output{white-space:pre-wrap;background:#071025;padding:12px;border-radius:8px;margin-top:12px;color:#dbe9ff}
@@ -81,6 +81,7 @@
       <button id="copy" class="ghost">Copy</button>
       <button id="download" class="ghost">Download .txt</button>
       <button id="print" class="ghost">Print</button>
+      <button id="reset" class="ghost">Reset</button>
     </div>
 
     <pre id="output">Project CA:
@@ -111,6 +112,21 @@ Disclaimer NFA</pre>
       return val.endsWith('%') ? val : val + '%';
     }
 
+    function defaultOutput(){
+      return `Project CA:
+Holders - num:
+Dev holding %:
+Top 10 holders %:
+Bundlers %:
+Pro traders - num:
+Snipers %:
+Insiders %:
+Liquidity Pool Burned:
+Dex paid:
+Time:
+Disclaimer NFA`;
+    }
+
     function buildOutput(){
       const get = id => document.getElementById(id).value || '';
       const parts = [];
@@ -130,6 +146,7 @@ Disclaimer NFA</pre>
     }
 
     const outputEl = document.getElementById('output');
+
     document.getElementById('generate').addEventListener('click', ()=>{
       outputEl.textContent = buildOutput();
     });
@@ -159,7 +176,12 @@ Disclaimer NFA</pre>
       w.print();
     });
 
-    outputEl.textContent = buildOutput();
+    document.getElementById('reset').addEventListener('click', ()=>{
+      document.querySelectorAll('input[type=text]').forEach(el => el.value = '');
+      outputEl.textContent = defaultOutput();
+    });
+
+    outputEl.textContent = defaultOutput();
   </script>
 </body>
 </html>
