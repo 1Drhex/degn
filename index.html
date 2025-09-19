@@ -42,8 +42,30 @@
 <label>Top holders</label>
 <textarea id="topHolders" placeholder="List top holders, comma or newline separated"></textarea>
 
-<label>Snipers</label>
-<textarea id="snipers" placeholder="List known snipers or bots (optional)"></textarea>
+<div class="row">
+  <div>
+    <label>Dev holding %</label>
+    <input id="devHolding" type="text" placeholder="e.g. 5%" />
+  </div>
+  <div>
+    <label>Top 10 holders %</label>
+    <input id="top10Holders" type="text" placeholder="e.g. 25%" />
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <label>Bundlers %</label>
+    <input id="bundlers" type="text" placeholder="e.g. 10%" />
+  </div>
+  <div>
+    <label>Pro traders - num</label>
+    <input id="proTraders" type="text" placeholder="e.g. 15" />
+  </div>
+</div>
+
+<label>Snipers %</label>
+<input id="snipers" type="text" placeholder="e.g. 3%" />
 
 <div class="row">
   <div>
@@ -68,22 +90,15 @@
 
 <pre id="output">Project CA:
 
-Symbol: Name: Top holders: snipers: Liquidity Pool Burned: Holders: Dex paid: Time: Disclaimer NFA</pre>
+Symbol: Name: Top holders: Dev holding %: Top 10 holders %: Bundlers %: Pro traders - num: Snipers %: Liquidity Pool Burned: Holders: Dex paid: Time: Disclaimer NFA</pre>
 
 <footer>Generated time is based on your browser clock.</footer>
 
   </div>  <script>
     function nowString(){
       const d = new Date();
-      // Format: YYYY-MM-DD HH:MM:SS (local)
       const pad = n => String(n).padStart(2,'0');
-      const YYYY = d.getFullYear();
-      const MM = pad(d.getMonth()+1);
-      const DD = pad(d.getDate());
-      const hh = pad(d.getHours());
-      const mm = pad(d.getMinutes());
-      const ss = pad(d.getSeconds());
-      return `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`;
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
     }
 
     function buildOutput(){
@@ -93,7 +108,11 @@ Symbol: Name: Top holders: snipers: Liquidity Pool Burned: Holders: Dex paid: Ti
       parts.push(`Symbol: ${get('symbol')}`);
       parts.push(`Name: ${get('name')}`);
       parts.push(`Top holders: ${get('topHolders')}`);
-      parts.push(`snipers: ${get('snipers')}`);
+      parts.push(`Dev holding %: ${get('devHolding')}`);
+      parts.push(`Top 10 holders %: ${get('top10Holders')}`);
+      parts.push(`Bundlers %: ${get('bundlers')}`);
+      parts.push(`Pro traders - num: ${get('proTraders')}`);
+      parts.push(`Snipers %: ${get('snipers')}`);
       parts.push(`Liquidity Pool Burned: ${get('lpBurned')}`);
       parts.push(`Holders: ${get('holders')}`);
       parts.push(`Dex paid: ${get('dexPaid')}`);
@@ -131,7 +150,6 @@ Symbol: Name: Top holders: snipers: Liquidity Pool Burned: Holders: Dex paid: Ti
   w.print();
 });
 
-// Initialize with current time in the output
 outputEl.textContent = buildOutput();
 
   </script>
