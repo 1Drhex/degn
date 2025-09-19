@@ -29,17 +29,6 @@
     <label>Project CA (contract address)</label>
     <input id="projectCA" type="text" placeholder="0x..." />
 
-    <div class="row">
-      <div>
-        <label>Symbol</label>
-        <input id="symbol" type="text" placeholder="TKN" />
-      </div>
-      <div>
-        <label>Name</label>
-        <input id="name" type="text" placeholder="Token Name" />
-      </div>
-    </div>
-
     <label>Holders - num</label>
     <input id="holdersNum" type="text" placeholder="e.g. 1,234" />
 
@@ -95,8 +84,6 @@
     </div>
 
     <pre id="output">Project CA:
-Symbol:
-Name:
 Holders - num:
 Dev holding %:
 Top 10 holders %:
@@ -128,8 +115,6 @@ Disclaimer NFA</pre>
       const get = id => document.getElementById(id).value || '';
       const parts = [];
       parts.push(`Project CA: ${get('projectCA')}`);
-      parts.push(`Symbol: ${get('symbol')}`);
-      parts.push(`Name: ${get('name')}`);
       parts.push(`Holders - num: ${get('holdersNum')}`);
       parts.push(`Dev holding %: ${formatPercent(get('devHolding'))}`);
       parts.push(`Top 10 holders %: ${formatPercent(get('top10Holders'))}`);
